@@ -52,51 +52,21 @@ public class Day4 {
     return total;
   }
 
-  // oh i am lazyyyeee
-  // refactor (maybe someday it will happen, or no)
   public static int runPart2() {
     int total = 0;
-
     int rows = grid.length;
     int cols = grid[0].length;
 
     for (int row = 0; row < rows; row++) {
       for (int col = 0; col < cols; col++) {
-        if (row + 2 < rows
-            && col + 2 < cols
-            && grid[row][col] == 'M'
-            && grid[row + 1][col + 1] == 'A'
-            && grid[row + 2][col + 2] == 'S'
-            && grid[row + 2][col] == 'M'
-            && grid[row][col + 2] == 'S') {
-          total++;
-        }
-        if (row + 2 < rows
-            && col + 2 < cols
-            && grid[row][col] == 'M'
-            && grid[row + 1][col + 1] == 'A'
-            && grid[row + 2][col + 2] == 'S'
-            && grid[row + 2][col] == 'S'
-            && grid[row][col + 2] == 'M') {
-          total++;
-        }
-        if (row + 2 < rows
-            && col + 2 < cols
-            && grid[row][col] == 'S'
-            && grid[row + 1][col + 1] == 'A'
-            && grid[row + 2][col + 2] == 'M'
-            && grid[row + 2][col] == 'M'
-            && grid[row][col + 2] == 'S') {
-          total++;
-        }
-        if (row + 2 < rows
-            && col + 2 < cols
-            && grid[row][col] == 'S'
-            && grid[row + 1][col + 1] == 'A'
-            && grid[row + 2][col + 2] == 'M'
-            && grid[row + 2][col] == 'S'
-            && grid[row][col + 2] == 'M') {
-          total++;
+        if (row + 2 < rows && col + 2 < cols) {
+          String diagonal1 = "" + grid[row][col] + grid[row + 1][col + 1] + grid[row + 2][col + 2];
+          String diagonal2 = "" + grid[row][col + 2] + grid[row + 1][col + 1] + grid[row + 2][col];
+
+          if ((diagonal1.equals("MAS") || diagonal1.equals("SAM"))
+              && (diagonal2.equals("MAS") || diagonal2.equals("SAM"))) {
+            total++;
+          }
         }
       }
     }
